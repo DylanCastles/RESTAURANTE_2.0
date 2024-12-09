@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+}
+
+#contenedorPrincipal {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#contenedorLogo {
+    background-color: #f3f4f6;
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 60%;
+    height: auto;
+}
+
+#contenedorForm {
+    background-color: rgba(81, 0, 0, 0.902);
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#contenedorFormFlotante {
+    background-color: #f3f4f6;
+    padding: 2rem;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: inset 0px 0px 8px 0px rgba(0,0,0,0.75);
+}
+
+#contenedorFormFlotante h1 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+#contenedorFormFlotante input[type="text"],
+#contenedorFormFlotante input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    box-sizing: border-box;
+    font-family: "Lexend", sans-serif;
+    text-align: center;
+}
+
+#contenedorFormFlotante input[type="text"]::placeholder,
+#contenedorFormFlotante input[type="password"]::placeholder {
+    text-align: center;
+}
+
+#contenedorFormFlotante button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: rgb(177, 8, 8);
+    color: #fff;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    box-sizing: border-box;
+    font-family: "Lexend", sans-serif;
+}
+
+#contenedorFormFlotante button:hover {
+    background-color: rgb(129, 6, 6);
+}
+
+.error-message {
+    font-size: 0.875rem;
+    color: #d9534f;
+    text-align: left;
+}
+
+#logoResponsive {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    #contenedorPrincipal {
+        flex-direction: column;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    #contenedorLogo {
+        display: none;
+    }
+
+    #contenedorForm {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f3f4f6;
+        background-color: rgba(81, 0, 0, 0.902);
+    }
+
+    #contenedorFormFlotante {
+        width: 90%;
+        max-width: 400px;
+        padding: 2rem;
+        margin: 0;
+        background-color: #ffffff;
+        box-shadow: inset 0px 0px 8px 0px rgba(0,0,0,0.75);
+        border-radius: 0;
+    }
+
+    .logo {
+        width: 60%;
+        margin-bottom: 1rem;
+    }
+
+    #logoResponsive {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
