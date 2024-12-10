@@ -14,9 +14,14 @@ CREATE TABLE recurso(
     tipoRecurso_recurso INT NOT NULL, -- FK
     recursoPadre_recurso INT NULL -- FK
 );
+CREATE TABLE tipoSala(
+    id_tipoSala INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre_tipoSala VARCHAR(50) NOT NULL
+);
 CREATE TABLE tipoRecurso(
     id_tipoRecurso INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nombre_tipoRecurso VARCHAR(50) NOT NULL
+    nombre_tipoRecurso VARCHAR(50) NOT NULL,
+    tipoSala_tipoRecurso INT NULL
 );
 CREATE TABLE persona(
     id_persona INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -57,6 +62,8 @@ ALTER TABLE
     recursoOcupacion ADD CONSTRAINT recursoocupacion_recurso_recursoocupacion_foreign FOREIGN KEY(recurso_recursoOcupacion) REFERENCES recurso(id_recurso);
 ALTER TABLE
     recurso ADD CONSTRAINT recurso_recursopadre_recurso_foreign FOREIGN KEY(recursoPadre_recurso) REFERENCES recurso(id_recurso);
+ALTER TABLE
+    tipoRecurso ADD FOREIGN KEY(tipoSala_tipoRecurso) REFERENCES tipoSala(id_tipoSala);
 ALTER TABLE
     cliente ADD CONSTRAINT cliente_persona_cliente_foreign FOREIGN KEY(persona_cliente) REFERENCES persona(id_persona);
 ALTER TABLE

@@ -27,7 +27,7 @@ function sanitizarVariables($variables) {
 
 // Función que recupera la información del camarero
 function reucperarInfoUsuario($pdo, $id_camarero) {
-    $query = "SELECT * FROM empleado WHERE username_empleado = :username";
+    $query = "SELECT empleado.*, persona.* FROM empleado INNER JOIN persona ON empleado.id_empleado=persona.id_persona WHERE username_empleado = :username";
 
     $stmt = $pdo->prepare($query);
 
