@@ -23,6 +23,7 @@ INSERT INTO empleado (username_empleado, pwd_empleado, salario_empleado, DNI_emp
 ('dylan_castles', '$2a$12$.HyOilkTAI0jq6eZNmHgcOTqPqhao9JM7PcTRdkp3TLIRAQnjkAo2', 2100, '46482026S', 1, 4); -- pwd: QWEqwe123
 
 -- SALAS
+-- SALAS
 INSERT INTO recurso (tipoRecurso_recurso, recursoPadre_recurso) VALUES
 (3, NULL), -- Sala 4
 (3, NULL), -- Sala 5
@@ -30,57 +31,81 @@ INSERT INTO recurso (tipoRecurso_recurso, recursoPadre_recurso) VALUES
 (3, NULL), -- Sala 7
 (3, NULL), -- Sala 8
 (3, NULL), -- Sala 9
-(3, NULL), -- Sala 10
-(3, NULL), -- Sala 11
-(3, NULL), -- Sala 12
-(3, NULL); -- Sala 13
+(3, NULL); -- Sala 10
+
 
 
 -- MESAS
+-- Sala 4: 6 mesas
 INSERT INTO recurso (tipoRecurso_recurso, recursoPadre_recurso) VALUES
-(2, 4), -- Mesa en Sala 4
-(2, 4), -- Mesa en Sala 4
-(2, 5), -- Mesa en Sala 5
-(2, 5), -- Mesa en Sala 5
-(2, 6), -- Mesa en Sala 6
-(2, 6), -- Mesa en Sala 6
-(2, 7), -- Mesa en Sala 7
-(2, 7), -- Mesa en Sala 7
-(2, 8), -- Mesa en Sala 8
-(2, 8), -- Mesa en Sala 8
-(2, 9), -- Mesa en Sala 9
-(2, 9), -- Mesa en Sala 9
-(2, 10), -- Mesa en Sala 10
-(2, 10), -- Mesa en Sala 10
-(2, 11), -- Mesa en Sala 11
-(2, 11), -- Mesa en Sala 11
-(2, 12), -- Mesa en Sala 12
-(2, 12), -- Mesa en Sala 12
-(2, 13); -- Mesa en Sala 13
+(2, 4), (2, 4), (2, 4), (2, 4), (2, 4), (2, 4);
+
+-- Sala 5: 3 mesas
+INSERT INTO recurso (tipoRecurso_recurso, recursoPadre_recurso) VALUES
+(2, 5), (2, 5), (2, 5);
+
+-- Sala 6: 0 mesas (sin mesas)
+
+-- Sala 7: 4 mesas
+INSERT INTO recurso (tipoRecurso_recurso, recursoPadre_recurso) VALUES
+(2, 7), (2, 7), (2, 7), (2, 7);
+
+-- Sala 8: 2 mesas
+INSERT INTO recurso (tipoRecurso_recurso, recursoPadre_recurso) VALUES
+(2, 8), (2, 8);
+
+-- Sala 9: 5 mesas
+INSERT INTO recurso (tipoRecurso_recurso, recursoPadre_recurso) VALUES
+(2, 9), (2, 9), (2, 9), (2, 9), (2, 9);
+
+-- Sala 10: 1 mesa
+INSERT INTO recurso (tipoRecurso_recurso, recursoPadre_recurso) VALUES
+(2, 10);
+
 
 
 -- SILLAS
+-- Sala 4: 6 mesas, cada una con 4 sillas
 INSERT INTO recurso (tipoRecurso_recurso, recursoPadre_recurso) VALUES
-(1, 14), -- Silla en Sala 4 (Mesa 1)
-(1, 14), -- Silla en Sala 4 (Mesa 2)
-(1, 15), -- Silla en Sala 5 (Mesa 1)
-(1, 15), -- Silla en Sala 5 (Mesa 2)
-(1, 16), -- Silla en Sala 6 (Mesa 1)
-(1, 16), -- Silla en Sala 6 (Mesa 2)
-(1, 17), -- Silla en Sala 7 (Mesa 1)
-(1, 17), -- Silla en Sala 7 (Mesa 2)
-(1, 18), -- Silla en Sala 8 (Mesa 1)
-(1, 18), -- Silla en Sala 8 (Mesa 2)
-(1, 19), -- Silla en Sala 9 (Mesa 1)
-(1, 19), -- Silla en Sala 9 (Mesa 2)
-(1, 20), -- Silla en Sala 10 (Mesa 1)
-(1, 20), -- Silla en Sala 10 (Mesa 2)
-(1, 21), -- Silla en Sala 11 (Mesa 1)
-(1, 21), -- Silla en Sala 11 (Mesa 2)
-(1, 22), -- Silla en Sala 12 (Mesa 1)
-(1, 22), -- Silla en Sala 12 (Mesa 2)
-(1, 23), -- Silla en Sala 13 (Mesa 1)
-(1, 23); -- Silla en Sala 13 (Mesa 2)
+(1, 14), (1, 14), (1, 14), (1, 14), -- Mesa 1
+(1, 15), (1, 15), (1, 15), (1, 15), -- Mesa 2
+(1, 16), (1, 16), (1, 16), (1, 16), -- Mesa 3
+(1, 17), (1, 17), (1, 17), (1, 17), -- Mesa 4
+(1, 18), (1, 18), (1, 18), (1, 18), -- Mesa 5
+(1, 19), (1, 19), (1, 19), (1, 19); -- Mesa 6
+
+-- Sala 5: 3 mesas, cada una con 2 sillas
+INSERT INTO recurso (tipoRecurso_recurso, recursoPadre_recurso) VALUES
+(1, 20), (1, 20), -- Mesa 1
+(1, 21), (1, 21), -- Mesa 2
+(1, 22), (1, 22); -- Mesa 3
+
+-- Sala 6: sin mesas (no hay sillas)
+
+-- Sala 7: 4 mesas, alternando 3 y 2 sillas por mesa
+INSERT INTO recurso (tipoRecurso_recurso, recursoPadre_recurso) VALUES
+(1, 23), (1, 23), (1, 23), -- Mesa 1
+(1, 24), (1, 24), -- Mesa 2
+(1, 25), (1, 25), (1, 25), -- Mesa 3
+(1, 26), (1, 26); -- Mesa 4
+
+-- Sala 8: 2 mesas, ambas con 4 sillas
+INSERT INTO recurso (tipoRecurso_recurso, recursoPadre_recurso) VALUES
+(1, 27), (1, 27), (1, 27), (1, 27), -- Mesa 1
+(1, 28), (1, 28), (1, 28), (1, 28); -- Mesa 2
+
+-- Sala 9: 5 mesas, cada una con 6 sillas
+INSERT INTO recurso (tipoRecurso_recurso, recursoPadre_recurso) VALUES
+(1, 29), (1, 29), (1, 29), (1, 29), (1, 29), (1, 29), -- Mesa 1
+(1, 30), (1, 30), (1, 30), (1, 30), (1, 30), (1, 30), -- Mesa 2
+(1, 31), (1, 31), (1, 31), (1, 31), (1, 31), (1, 31), -- Mesa 3
+(1, 32), (1, 32), (1, 32), (1, 32), (1, 32), (1, 32), -- Mesa 4
+(1, 33), (1, 33), (1, 33), (1, 33), (1, 33), (1, 33); -- Mesa 5
+
+-- Sala 10: 1 mesa, con 2 sillas
+INSERT INTO recurso (tipoRecurso_recurso, recursoPadre_recurso) VALUES
+(1, 34), (1, 34); -- Mesa 1
+
 
 
 
