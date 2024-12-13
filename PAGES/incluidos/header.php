@@ -2,7 +2,7 @@
 
 <?php 
 $paginaActual = basename($_SERVER['SCRIPT_NAME']); 
-$resultadoInfoUser = reucperarInfoUsuario($pdo, $_SESSION['user_id']);
+$resultadoInfoUser = recuperarInfoUsuario($pdo, $_SESSION['user_id']);
 ?>
 
 <header id="container_header">

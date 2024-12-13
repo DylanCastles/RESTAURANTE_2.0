@@ -28,7 +28,7 @@ require '../php/conexion.php';
 
 
 // Recojemos la información del usuario
-$info_user = reucperarInfoUsuario($pdo, $_SESSION['user_id']);
+$info_user = recuperarInfoUsuario($pdo, $_SESSION['user_id']);
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +42,7 @@ $info_user = reucperarInfoUsuario($pdo, $_SESSION['user_id']);
     <link rel="stylesheet" href="../css/mesas.css">
 </head>
 <body>
-    <?php require_once './header.php' ?>
+    <?php require_once './incluidos/header.php' ?>
 
     <main id="mesas_main">
         

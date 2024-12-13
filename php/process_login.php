@@ -33,7 +33,7 @@ if (empty($resultado['user']) || empty($resultado['contrasena'])) {
 }
 
 // Consulta para saber si el nomrbe de usuario y contraseña son correctos
-$query = "SELECT username_empleado, pwd_empleado FROM empleado WHERE username_empleado = :username";
+$query = "SELECT empleado.username_empleado, empleado.pwd_empleado, tipoEmpleado.nombre_tipoEmpleado FROM empleado INNER JOIN tipoEmpleado ON empleado.tipoEmpleado_empleado=tipoEmpleado.id_tipoEmpleado WHERE username_empleado = :username";
 
 // Preparamos la consulta con la conexion a la bbdd
 $stmt = $pdo->prepare($query);
@@ -53,6 +53,11 @@ if ($resultado && password_verify($resultado['contrasena'], $resultadoQuery['pwd
     // Variable de sesion que se mantiene durente todas las paginas al entrar
     session_start();
     $_SESSION['user_id'] = $resultado['user'];
+
+    // Si es gerente guarda una variable de sesion (ya que es admin)
+    if ($resultadoQuery['nombre_tipoEmpleado'] === "gerente") {
+        $_SESSION['userAdmin'] = "true";
+    }
 
     // Redirección a mesas.php con SweetAlert
     echo "<script type='text/javascript'>
