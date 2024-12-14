@@ -8,14 +8,8 @@ $errors = [];
 // Requerimos los archivos
 require_once '../php/functions.php'; 
 
-// Verificamos si la sesión del camarero está activa
-if (!isset($_SESSION['user_id'])) {
-
-    // Si no está activo, redirigimos a la página de inicio de sesión
-    $errors['errorPagina'] = 'noAutorizado';
-    redirigirConErrores('./index.php', $errors);
-    exit();
-}
+// Funcion para saber si se ha iniciado sesion
+inicioSesion();
 
 // Incluimos el archivo de conexión a la base de datos
 require '../php/conexion.php';

@@ -38,17 +38,22 @@ window.onload = function() {
     const opcionAhora = document.getElementById('opcionRadioAhora');
     const opcionReserva = document.getElementById('opcionRadioReserva');
     opcionEscogida = "";
-    document.getElementById('radioAhora').addEventListener('change', function() {
-        opcionAhora.style.display = "inline-block";
-        opcionReserva.style.display = "none";
-        opcionEscogida = "ahora";
-        document.getElementById("fechaHoraError").textContent = "";
-    });
-    document.getElementById('radioReserva').addEventListener('change', function() {
-        opcionReserva.style.display = "inline-block";
-        opcionAhora.style.display = "none";
-        opcionEscogida = "";
-    });
+    const radioAhora = document.getElementById('radioAhora');
+    const radioReserva = document.getElementById('radioReserva');
+
+    if (radioAhora && radioReserva) {
+        radioAhora.addEventListener('change', function() {
+            opcionAhora.style.display = "inline-block";
+            opcionReserva.style.display = "none";
+            opcionEscogida = "ahora";
+            document.getElementById("fechaHoraError").textContent = "";
+        });
+        radioReserva.addEventListener('change', function() {
+            opcionReserva.style.display = "inline-block";
+            opcionAhora.style.display = "none";
+            opcionEscogida = "";
+        });
+    }
 };
 
 // ------------------------------------------------------------------------------------------------------------------

@@ -34,7 +34,7 @@ CREATE TABLE tipoEmpleado(
 );
 CREATE TABLE cliente(
     id_cliente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    tel_cliente INT NOT NULL,
+    tel_cliente INT NULL, -- En caso de extenderlo
     persona_cliente INT NOT NULL  -- FK
 );
 CREATE TABLE empleado(

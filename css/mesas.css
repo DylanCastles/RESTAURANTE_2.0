@@ -156,7 +156,6 @@ html, body {
     align-items: center;
     justify-content: center;
     border: 2px solid #412326;
-    background-color: #7e4248;
     border-radius: 5px;
     width: 100px;
     height: 100px;
@@ -203,16 +202,48 @@ html, body {
 
 #formOpcionesRecurso {
     width: 100%;
-    height: 100%;
-    /* background-color: red; */
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
+    box-sizing: border-box;
+}
+#reservasEncontradas {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    box-sizing: border-box;
+}
+.reservaEncontradaDiv {
+    width: 80%;
+    aspect-ratio: 10 / 1;
+    height: auto;
+    margin-bottom: 10px;
+    padding: 1%;
+    padding-left: 8%;
+    padding-right: 8%;
+    background-color: blue;
+    border: 2px solid #412326;
+    background-color: #7e4248;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.interiorReserva {
+    margin-bottom: 0;
 }
 
 .libreEstilo {
     color: rgb(35, 67, 35);
+}
+.ocupadoEstilo {
+    color: rgb(77, 28, 28);
 }
 
 .inputPersInt {
@@ -277,7 +308,31 @@ html, body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.btnEliminarReserva {
+    width: 100%;
+    color: white;
+    background-color: #76262e;
+    border: solid 2px #442326;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btnEliminarReserva:focus {
+    background-color: #76262e;
+    border: solid 2px #442326;
+    outline: none; /* Elimina el borde por defecto */
+}
+
+.btnEliminarReserva:hover {
+    color: #442326;
+    background-color: #744e52;
+    border: solid 2px #442326;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 #formPersonalizado {
+    padding-bottom: 2%;
+}
+#formPersonalizado2 {
     padding-bottom: 2%;
 }
 
@@ -352,6 +407,13 @@ html, body {
         height: 100%;
         display: flex;
         justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+#mesas_main {
+    flex-direction: column;
+    padding: 5%;
     }
 }
 

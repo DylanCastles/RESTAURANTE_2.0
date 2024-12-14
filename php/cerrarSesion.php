@@ -19,12 +19,12 @@
                     icon: 'success',
                     confirmButtonText: 'OK'
                 }).then(function() {
-                    window.location.href = '../view/index.php';
+                    window.location.href = '../PAGES/index.php';
                 });
             </script>";
     exit();
     } else {
-        header('Location: ../view/index.php');
+        header('Location: ../PAGES/index.php');
     }
 ?>
 </body>

@@ -1,5 +1,5 @@
 <?php
-// Consulta para saber si el nomrbe de usuario y contraseña son correctos
+// Consulta
 $query1 = "SELECT recurso.id_recurso, tipoSala.nombre_tipoSala FROM recurso INNER JOIN tipoRecurso ON recurso.tipoRecurso_recurso = tipoRecurso.id_tipoRecurso INNER JOIN tipoSala ON tipoRecurso.tipoSala_tipoRecurso = tipoSala.id_tipoSala WHERE tipoRecurso.nombre_tipoRecurso = :tiporecurso1";
 
 // Preparamos la consulta con la conexion a la bbdd
@@ -17,7 +17,7 @@ $resultadoQuery1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($resultadoQuery1 as $fila1) {
 
-    // Consulta para saber si el nomrbe de usuario y contraseña son correctos
+    // Consulta
     $query2 = "SELECT recurso.id_recurso FROM recurso INNER JOIN tipoRecurso ON recurso.tipoRecurso_recurso = tipoRecurso.id_tipoRecurso WHERE tiporecurso.nombre_tipoRecurso = :tiporecurso2 AND recurso.recursoPadre_recurso = :recursoPadre1";
     
     // Preparamos la consulta con la conexion a la bbdd
@@ -45,7 +45,7 @@ foreach ($resultadoQuery1 as $fila1) {
         <?php
             foreach ($resultadoQuery2 as $fila2) {
 
-                    // Consulta para saber si el nomrbe de usuario y contraseña son correctos
+                    // Consulta 
                     $query3 = "SELECT recurso.id_recurso FROM recurso INNER JOIN tipoRecurso ON recurso.tipoRecurso_recurso = tipoRecurso.id_tipoRecurso WHERE tiporecurso.nombre_tipoRecurso = :tiporecurso3 AND recurso.recursoPadre_recurso = :recursoPadre2";
                     
                     // Preparamos la consulta con la conexion a la bbdd
@@ -62,8 +62,15 @@ foreach ($resultadoQuery1 as $fila1) {
 
                     // Hacemos un array asociativo de los resultados
                     $resultadoQuery3 = $stmt3->fetchAll(PDO::FETCH_ASSOC);
+
+                    // Llamamos a funcion para comprobar si la silla esta ocupada
+                    if (comprobarEstadoMesa($pdo, $fila2['id_recurso'])) {
+                        $mesaOcupada = true;
+                    } else {
+                        $mesaOcupada = false;
+                    }
                 ?>
-                    <a href="./mesas.php?mesa=<?php echo $fila2['id_recurso']; ?>" class="divClicable"><div class="mesa">
+                    <a href="./mesas.php?mesa=<?php echo $fila2['id_recurso']; ?>" class="divClicable"><div style="background-color: <?php echo $mesaOcupada ? "#7e4248;" : "#417544" ;?>;" class="mesa">
                         <span><h5>Mesa <?php echo $fila2['id_recurso'];?></h5></span>
                         <span>Sillas: <?php echo count($resultadoQuery3)?></span>
                     </div></a>

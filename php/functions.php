@@ -119,23 +119,79 @@ function comprobarFechas($pdo, $fechaInicio, $fechaFinal, $recurso){
     }
 
     // Comprobar que no haya ninguna ocupacion con cualquier de las dos fechas entre las dos de la actual
-    $query1 = "SELECT COUNT(*) AS ocupacionesEncontradas FROM ocupacion INNER JOIN recursoOcupacion ON ocupacion.id_ocupacion = recursoOcupacion.ocupacion_recursoOcupacion WHERE ((ocupacion.fechaInicio_ocupacion >= :fechaInicioNueva AND ocupacion.fechaInicio_ocupacion <= :fechaFinalNueva) OR (ocupacion.fechaFinal_ocupacion >= :fechaInicioNueva AND ocupacion.fechaFinal_ocupacion <= :fechaFinalNueva)) AND recursoOcupacion.recurso_recursoOcupacion = :recursoOcupado;";
+    $query2 = "SELECT COUNT(*) AS ocupacionesEncontradas FROM ocupacion INNER JOIN recursoOcupacion ON ocupacion.id_ocupacion = recursoOcupacion.ocupacion_recursoOcupacion WHERE ((ocupacion.fechaInicio_ocupacion >= :fechaInicioNueva AND ocupacion.fechaInicio_ocupacion <= :fechaFinalNueva) OR (ocupacion.fechaFinal_ocupacion >= :fechaInicioNueva AND ocupacion.fechaFinal_ocupacion <= :fechaFinalNueva)) AND recursoOcupacion.recurso_recursoOcupacion = :recursoOcupado;";
     
-    $stmt1 = $pdo->prepare($query1);
+    $stmt2 = $pdo->prepare($query2);
 
-    $stmt1->bindParam(':fechaInicioNueva', $fechaInicio);
+    $stmt2->bindParam(':fechaInicioNueva', $fechaInicio);
 
-    $stmt1->bindParam(':fechaFinalNueva', $fechaFinal);
+    $stmt2->bindParam(':fechaFinalNueva', $fechaFinal);
 
-    $stmt1->bindParam(':recursoOcupado', $recurso);
+    $stmt2->bindParam(':recursoOcupado', $recurso);
 
-    $stmt1->execute();
+    $stmt2->execute();
 
-    $resultadoQuery1 = $stmt1->fetch(PDO::FETCH_ASSOC);
+    $resultadoQuery2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-    if ($resultadoQuery1['ocupacionesEncontradas'] > 0) {
+    if ($resultadoQuery2['ocupacionesEncontradas'] > 0) {
         return true;
+    } else {
+        return false;
     }
+}
+
+// Funcion para comprobar si la mesa esta ocupada o no
+function comprobarEstadoMesa($pdo, $idMesa) {
+    // Crear objeto a partir de la fecha y hora actual
+    $fechaHoraActual = new DateTime();
+    // Añadirle una hora al objeto de la fecha/hora actual para que sea como España
+    $fechaHoraActual->modify('+ 1 hour');
+    // Guardar en la variable fechaInicio la fecha/hora actual formateada
+    $fechaHoraActual = $fechaHoraActual->format('Y-m-d H:i:s');
+
+    // Comprobar que ninguna de las fechas de la ocupacion actual este entre dos de cualquier ocupacion
+    $query = "SELECT COUNT(*) AS ocupacionesEncontradas FROM ocupacion INNER JOIN recursoOcupacion ON ocupacion.id_ocupacion = recursoOcupacion.ocupacion_recursoOcupacion WHERE recursoOcupacion.recurso_recursoOcupacion = :mesa AND ocupacion.fechaInicio_ocupacion < :fechaHoraActual AND ocupacion.fechaFinal_ocupacion > :fechaHoraActual ;";
+
+    $stmt = $pdo->prepare($query);
+
+    $stmt->bindParam(':mesa', $idMesa);
+
+    $stmt->bindParam(':fechaHoraActual', $fechaHoraActual);
+
+    $stmt->execute();
+
+    $resultadoQuery = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($resultadoQuery['ocupacionesEncontradas'] > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// Funcion para comprobar la id ocupacion de la mesa actualmente
+function comprobarIdOcupacionMesa($pdo, $idMesa) {
+    // Crear objeto a partir de la fecha y hora actual
+    $fechaHoraActual = new DateTime();
+    // Añadirle una hora al objeto de la fecha/hora actual para que sea como España
+    $fechaHoraActual->modify('+ 1 hour');
+    // Guardar en la variable fechaInicio la fecha/hora actual formateada
+    $fechaHoraActual = $fechaHoraActual->format('Y-m-d H:i:s');
+
+    // Comprobar que ninguna de las fechas de la ocupacion actual este entre dos de cualquier ocupacion
+    $query = "SELECT ocupacion.id_ocupacion AS idOcupacion FROM ocupacion INNER JOIN recursoOcupacion ON ocupacion.id_ocupacion = recursoOcupacion.ocupacion_recursoOcupacion WHERE recursoOcupacion.recurso_recursoOcupacion = :mesa AND ocupacion.fechaInicio_ocupacion < :fechaHoraActual AND ocupacion.fechaFinal_ocupacion > :fechaHoraActual ;";
+
+    $stmt = $pdo->prepare($query);
+
+    $stmt->bindParam(':mesa', $idMesa);
+
+    $stmt->bindParam(':fechaHoraActual', $fechaHoraActual);
+
+    $stmt->execute();
+
+    $resultadoQuery = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $resultadoQuery['idOcupacion'];
 }
 
 ?>
