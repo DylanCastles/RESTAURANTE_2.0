@@ -11,6 +11,9 @@ require_once '../php/functions.php';
 // Funcion para saber si se ha iniciado sesion
 inicioSesion();
 
+// Funcion para saber si es admin o no
+isAdmin();
+
 // Incluimos el archivo de conexión a la base de datos
 require '../php/conexion.php';
 

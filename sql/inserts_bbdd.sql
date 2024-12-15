@@ -22,7 +22,24 @@ INSERT INTO tipoEmpleado (nombre_tipoEmpleado) VALUES
 INSERT INTO empleado (username_empleado, pwd_empleado, salario_empleado, DNI_empleado, persona_empleado, tipoEmpleado_empleado) VALUES
 ('dylan_castles', '$2a$12$.HyOilkTAI0jq6eZNmHgcOTqPqhao9JM7PcTRdkp3TLIRAQnjkAo2', 2100, '46482026S', 1, 4); -- pwd: QWEqwe123
 
--- SALAS
+
+-- Personal extra (comprobar id's)
+INSERT INTO persona (nombre_persona, apellido_persona) VALUES
+('Sergio', 'Ramirez'),
+('David', 'Palamos'),
+('Maria', 'Alcino'),
+('Hector', 'Haster'),
+('Juan', 'Bastos'),
+('Elena', 'Pastor');
+
+INSERT INTO empleado (username_empleado, pwd_empleado, salario_empleado, DNI_empleado, persona_empleado, tipoEmpleado_empleado) VALUES
+('sergio_ramirez', '$2a$12$.HyOilkTAI0jq6eZNmHgcOTqPqhao9JM7PcTRdkp3TLIRAQnjkAo2', 1300, '43482526S', 2, 1), -- pwd: QWEqwe123
+('david_palamos', '$2a$12$.HyOilkTAI0jq6eZNmHgcOTqPqhao9JM7PcTRdkp3TLIRAQnjkAo2', 1350, '46442066S', 3, 1),
+('maria_alcino', '$2a$12$.HyOilkTAI0jq6eZNmHgcOTqPqhao9JM7PcTRdkp3TLIRAQnjkAo2', 1400, '46481066S', 4, 1),
+('hector_haster', '$2a$12$.HyOilkTAI0jq6eZNmHgcOTqPqhao9JM7PcTRdkp3TLIRAQnjkAo2', 1200, '43482926S', 5, 2),
+('juan_bastos', '$2a$12$.HyOilkTAI0jq6eZNmHgcOTqPqhao9JM7PcTRdkp3TLIRAQnjkAo2', 1800, '46282226S', 6, 3),
+('elena_pastor', '$2a$12$.HyOilkTAI0jq6eZNmHgcOTqPqhao9JM7PcTRdkp3TLIRAQnjkAo2', 1850, '43482526S', 7, 3);
+
 -- SALAS
 INSERT INTO recurso (tipoRecurso_recurso, recursoPadre_recurso) VALUES
 (3, NULL), -- Sala 4

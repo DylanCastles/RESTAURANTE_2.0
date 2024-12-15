@@ -6,8 +6,8 @@ CREATE TABLE ocupacion(
     fechaInicio_ocupacion DATETIME NOT NULL,
     fechaFinal_ocupacion DATETIME NOT NULL,
     detalles_ocupacion VARCHAR(100) NULL,
-    empleado_ocupacion INT NOT NULL, -- FK
-    cliente_ocupacion INT NOT NULL -- FK
+    empleado_ocupacion INT NULL, -- FK
+    cliente_ocupacion INT NULL -- FK
 );
 CREATE TABLE recurso(
     id_recurso INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -39,16 +39,16 @@ CREATE TABLE cliente(
 );
 CREATE TABLE empleado(
     id_empleado INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    username_empleado VARCHAR(100) NOT NULL,
+    username_empleado VARCHAR(100) NOT NULL UNIQUE,
     pwd_empleado CHAR(60) NOT NULL,
     salario_empleado INT NULL,
-    DNI_empleado CHAR(9) NOT NULL,
+    DNI_empleado CHAR(9) NOT NULL UNIQUE,
     persona_empleado INT NOT NULL, -- FK
     tipoEmpleado_empleado INT NOT NULL -- FK
 );
 CREATE TABLE recursoOcupacion(
     id_recursoOcupacion INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    sillas_ocupacion INT NOT NULL,
+    sillas_recursoOcupacion INT NOT NULL,
     ocupacion_recursoOcupacion INT NOT NULL, -- FK
     recurso_recursoOcupacion INT NOT NULL -- FK
 );

@@ -41,18 +41,23 @@ $resultadoInfoUser = recuperarInfoUsuario($pdo, $_SESSION['user_id']);
         <a id="mesasBtn" class="btn btn-danger me-2 btn_custom_logOut <?php echo $paginaActual === 'mesas.php' ? 'btn_seleccionado' : 'btn_normal'; ?>" href="./mesas.php">
             <?php echo $paginaActual === 'mesas.php' ? 'Mesas' : '<i class="fa-solid fa-chair"></i>'; ?>
         </a>
+        <?php
+            if (isset($_SESSION['userAdmin'])) {
+        ?>
+            <a id="recursosBtn" class="btn btn-danger me-2 btn_custom_logOut <?php echo $paginaActual === 'recursos.php' ? 'btn_seleccionado' : 'btn_normal'; ?>" href="./recursos.php">
+                <?php echo $paginaActual === 'recursos.php' ? 'Recursos' : '<i class="fa-solid fa-box-open"></i>'; ?>
+            </a>
 
-        <a id="recursosBtn" class="btn btn-danger me-2 btn_custom_logOut <?php echo $paginaActual === 'recursos.php' ? 'btn_seleccionado' : 'btn_normal'; ?>" href="./recursos.php">
-            <?php echo $paginaActual === 'recursos.php' ? 'Recursos' : '<i class="fa-solid fa-box-open"></i>'; ?>
-        </a>
+            <a id="personalBtn" class="btn btn-danger me-2 btn_custom_logOut <?php echo $paginaActual === 'personal.php' ? 'btn_seleccionado' : 'btn_normal'; ?>" href="./personal.php">
+                <?php echo $paginaActual === 'personal.php' ? 'Personal' : '<i class="fa-solid fa-people-group"></i>'; ?>
+            </a>
 
-        <a id="personalBtn" class="btn btn-danger me-2 btn_custom_logOut <?php echo $paginaActual === 'personal.php' ? 'btn_seleccionado' : 'btn_normal'; ?>" href="./personal.php">
-            <?php echo $paginaActual === 'personal.php' ? 'Personal' : '<i class="fa-solid fa-people-group"></i>'; ?>
-        </a>
-
-        <a id="historicoBtn" class="btn btn-danger me-2 btn_custom_logOut <?php echo $paginaActual === 'historico.php' ? 'btn_seleccionado' : 'btn_normal'; ?>" href="./historico.php">
-            <?php echo $paginaActual === 'historico.php' ? 'Histórico' : '<i class="fa-solid fa-clock-rotate-left"></i>'; ?>
-        </a>
+            <a id="historicoBtn" class="btn btn-danger me-2 btn_custom_logOut <?php echo $paginaActual === 'historico.php' ? 'btn_seleccionado' : 'btn_normal'; ?>" href="./historico.php">
+                <?php echo $paginaActual === 'historico.php' ? 'Histórico' : '<i class="fa-solid fa-clock-rotate-left"></i>'; ?>
+            </a>
+        <?php
+            }
+        ?>
 
         <a id="logoutBtn" class="btn btn-danger btn_custom_logOut btn_normal" href="../php/cerrarSesion.php"><i class="fa-solid fa-right-from-bracket"></i></a>
     </nav>

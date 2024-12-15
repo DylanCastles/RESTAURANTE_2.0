@@ -96,6 +96,15 @@ function inicioSesion(){
     }
 }
 
+// Funcion para saber si es admin o no
+function isAdmin(){
+    if (!isset($_SESSION['userAdmin'])) {
+        $errors['errorPermisos'] = 'noAdmin';
+        redirigirConErrores('../PAGES/mesas.php', $errors);
+    }
+}
+
+
 // Funcion para comprobar que las dos fechas de la reserva no coincidan con otra
 function comprobarFechas($pdo, $fechaInicio, $fechaFinal, $recurso){
 

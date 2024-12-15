@@ -152,7 +152,7 @@ try {
 
     $idOcupacion = $pdo->lastInsertId();
 
-    $InsertTablaRecursoOcupacion = "INSERT INTO recursoOcupacion (sillas_ocupacion, ocupacion_recursoOcupacion, recurso_recursoOcupacion) VALUES (:sillas, :ocupacion, :recurso)";
+    $InsertTablaRecursoOcupacion = "INSERT INTO recursoOcupacion (sillas_recursoOcupacion, ocupacion_recursoOcupacion, recurso_recursoOcupacion) VALUES (:sillas, :ocupacion, :recurso)";
 
     // Preparamos la consulta con la conexion a la bbdd
     $stmt4 = $pdo->prepare($InsertTablaRecursoOcupacion);
