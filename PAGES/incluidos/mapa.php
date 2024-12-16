@@ -39,8 +39,14 @@ foreach ($resultadoQuery1 as $fila1) {
     <a href="./mesas.php?sala=<?php echo $fila1['id_recurso']; ?>" class="divClicable"><div class="sala">
         <h2>Sala <?php echo $fila1['id_recurso'];?></h2>
         <p>Tipo: <?php echo $fila1['nombre_tipoSala'];?></p>
-        <div class="imgSalaContenedor">
-            <i id="imgSala" class="fa-solid fa-image"></i>
+        <div class="imgSalaContenedor"
+            <?php 
+            if (file_exists('../img/imgSalas/sala' . $fila1['id_recurso'] . 'foto.jpg')) {
+                echo 'style="background-image: url(\'../img/imgSalas/sala' . $fila1['id_recurso'] . 'foto.jpg\');">';
+            } else {
+                echo '><i id="imgSala" class="fa-solid fa-image"></i>';
+            }
+            ?>
         </div>
         <?php
             foreach ($resultadoQuery2 as $fila2) {

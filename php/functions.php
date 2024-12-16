@@ -27,7 +27,7 @@ function sanitizarVariables($variables) {
 
 // Función que recupera la información del camarero
 function recuperarInfoUsuario($pdo, $id_camarero) {
-    $query = "SELECT empleado.*, persona.* FROM empleado INNER JOIN persona ON empleado.id_empleado=persona.id_persona WHERE username_empleado = :username";
+    $query = "SELECT empleado.*, persona.* FROM empleado INNER JOIN persona ON empleado.persona_empleado=persona.id_persona WHERE empleado.username_empleado = :username";
 
     $stmt = $pdo->prepare($query);
 
@@ -201,6 +201,41 @@ function comprobarIdOcupacionMesa($pdo, $idMesa) {
     $resultadoQuery = $stmt->fetch(PDO::FETCH_ASSOC);
 
     return $resultadoQuery['idOcupacion'];
+}
+
+// Función para saber si existe alguna persona con el mismo dni o username
+function saberDuplicados($pdo, $username, $dni, $id) {
+    $query1 = "SELECT COUNT(*) AS usuariosEncontrados FROM empleado WHERE username_empleado = :username AND id_empleado != :id;";
+
+    $stmt1 = $pdo->prepare($query1);
+
+    $stmt1->bindParam(':username', $username);
+    $stmt1->bindParam(':id', $id);
+
+    $stmt1->execute();
+
+    $resultadoQuery1 = $stmt1->fetch(PDO::FETCH_ASSOC);
+
+    if ($resultadoQuery1['usuariosEncontrados'] > 0) {
+        return 'username';
+    }
+
+    $query2 = "SELECT COUNT(*) AS usuariosEncontrados FROM empleado WHERE DNI_empleado = :dni AND id_empleado != :id";
+
+    $stmt2 = $pdo->prepare($query2);
+
+    $stmt2->bindParam(':dni', $dni);
+    $stmt2->bindParam(':id', $id);
+
+    $stmt2->execute();
+
+    $resultadoQuery2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+    if ($resultadoQuery2['usuariosEncontrados'] > 0) {
+        return 'dni';
+    }
+    
+    return false;
 }
 
 ?>

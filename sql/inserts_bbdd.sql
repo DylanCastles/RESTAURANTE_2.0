@@ -38,7 +38,7 @@ INSERT INTO empleado (username_empleado, pwd_empleado, salario_empleado, DNI_emp
 ('maria_alcino', '$2a$12$.HyOilkTAI0jq6eZNmHgcOTqPqhao9JM7PcTRdkp3TLIRAQnjkAo2', 1400, '46481066S', 4, 1),
 ('hector_haster', '$2a$12$.HyOilkTAI0jq6eZNmHgcOTqPqhao9JM7PcTRdkp3TLIRAQnjkAo2', 1200, '43482926S', 5, 2),
 ('juan_bastos', '$2a$12$.HyOilkTAI0jq6eZNmHgcOTqPqhao9JM7PcTRdkp3TLIRAQnjkAo2', 1800, '46282226S', 6, 3),
-('elena_pastor', '$2a$12$.HyOilkTAI0jq6eZNmHgcOTqPqhao9JM7PcTRdkp3TLIRAQnjkAo2', 1850, '43482526S', 7, 3);
+('elena_pastor', '$2a$12$.HyOilkTAI0jq6eZNmHgcOTqPqhao9JM7PcTRdkp3TLIRAQnjkAo2', 1850, '43482576S', 7, 3);
 
 -- SALAS
 INSERT INTO recurso (tipoRecurso_recurso, recursoPadre_recurso) VALUES
@@ -122,26 +122,3 @@ INSERT INTO recurso (tipoRecurso_recurso, recursoPadre_recurso) VALUES
 -- Sala 10: 1 mesa, con 2 sillas
 INSERT INTO recurso (tipoRecurso_recurso, recursoPadre_recurso) VALUES
 (1, 34), (1, 34); -- Mesa 1
-
-
-
-
--- INSERT INTO ocupacion (fechaInicio_ocupacion, fechaFinal_ocupacion, detalles_ocupacion, empleado_ocupacion, cliente_ocupacion) VALUES
--- ('2024-12-10 15:00:00', '2024-12-10 17:00:00', ),
--- ('sala'),
--- ('sala'),
--- ('mesa', 1),
--- ('mesa', 1),
--- ('mesa', 1),
--- ('mesa', 2),
--- ('mesa', 2),
--- ('mesa', 3);
-
--- CREATE TABLE ocupacion(
---     id_ocupacion INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
---     fechaInicio_ocupacion DATETIME NOT NULL,
---     fechaFinal_ocupacion DATETIME NOT NULL,
---     detalles_ocupacion VARCHAR(100) NULL,
---     empleado_ocupacion INT NOT NULL, -- FK
---     cliente_ocupacion INT NOT NULL -- FK
--- );

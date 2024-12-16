@@ -20,6 +20,32 @@ $resultadoGET = sanitizarVariables($_GET);
 // Incluimos el archivo de conexión a la base de datos
 require '../php/conexion.php';
 
+if (isset($resultadoGET['errorAccionEmpleado'])) {
+    if ($resultadoGET['errorAccionEmpleado'] === "usernameDuplicado") {
+        echo "<script type='text/javascript'>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: '¡Nombre de usuario ya existe!',
+                    html: 'El nombre de usuario ya existe, cámbialo.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            });
+        </script>";
+    } elseif ($resultadoGET['errorAccionEmpleado'] === "dniDuplicado") {
+        echo "<script type='text/javascript'>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: '¡DNI usado!',
+                    html: 'El DNI ya lo tiene otra persona.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            });
+        </script>";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -30,6 +56,7 @@ require '../php/conexion.php';
     <title>Mesas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/validateEmpleado.js"></script>
     <link rel="stylesheet" href="../css/mesas.css">
 </head>
@@ -42,9 +69,16 @@ require '../php/conexion.php';
             if ($resultadoGET['accion'] === "editar") {
                 $infoEmpleado = recuperarInfoUsuario($pdo, $resultadoGET['empleado']);
             }
+            if ($resultadoGET['accion'] === "crear" && isset($resultadoGET['usuarioEmpleado'])) {
+                $infoEmpleado['username_empleado'] = $resultadoGET['usuarioEmpleado'];
+                $infoEmpleado['nombre_persona'] = $resultadoGET['nombreEmpleado'];
+                $infoEmpleado['apellido_persona'] = $resultadoGET['apellidoEmpleado'];
+                $infoEmpleado['salario_empleado'] = $resultadoGET['salarioEmpleado'];
+                $infoEmpleado['DNI_empleado'] = $resultadoGET['dniEmpleado'];
+            }
         ?>
             <div id="formCrearUsuario">
-                <form action="../php/process_accionEmpleado.php?accion=<?php echo $resultadoGET['accion'] ?>" id="formPersonalizado" method="post">
+                <form action="../php/process_accionEmpleado.php?accion=<?php echo $resultadoGET['accion'] ?><?php echo $resultadoGET['accion'] === 'editar' ? '&empleado=' . $resultadoGET['empleado'] : '' ;?>" id="formPersonalizado" method="post">
                     <h1 id="tituloForm">Datos empleado</h1>
                     <br>
                     <label class="labelForm" for=""><strong>Nombre de usuario:</strong><br><input type="text" class="inputPers inputPersCrear" name="usuarioEmpleado" id="usuarioEmpleado" value="<?php echo isset($infoEmpleado['username_empleado']) ? $infoEmpleado['username_empleado'] : '' ?>"></label>
@@ -55,6 +89,22 @@ require '../php/conexion.php';
                     <br>
                     <label class="labelForm" for=""><strong>Apellido:</strong> <input type="text" class="inputPers inputPersCrear" name="apellidoEmpleado" id="apellidoEmpleado" value="<?php echo isset($infoEmpleado['apellido_persona']) ? $infoEmpleado['apellido_persona'] : '' ?>"></label>
                     <span id="apellidoError" class="error-message"></span>
+                    <br>
+                    <label class="labelForm" for=""><strong>Tipo:</strong> <select type="text" class="inputPers inputPersCrear" name="tipoEmpleado" id="tipoEmpleado">
+                        <?php
+                            $queryTipos = "SELECT * FROM tipoEmpleado";
+
+                            $stmtTipos = $pdo->prepare($queryTipos);
+                            $stmtTipos->execute();
+
+                            while ($row = $stmtTipos->fetch(PDO::FETCH_ASSOC)) {
+                                $selected = isset($infoEmpleado['tipoEmpleado_empleado']) && $infoEmpleado['tipoEmpleado_empleado'] === $row['id_tipoEmpleado'] ? "selected" : "";
+                                echo "<option value='" . $row['id_tipoEmpleado'] . "' $selected>" . $row['nombre_tipoEmpleado'] . "</option>";
+                            }
+                        ?>
+                    </select>
+                    </label>
+                    <br>
                     <br>
                     <label class="labelForm" for=""><strong>Salario:</strong> <input type="text" class="inputPers inputPersCrear" name="salarioEmpleado" id="salarioEmpleado" value="<?php echo isset($infoEmpleado['salario_empleado']) ? $infoEmpleado['salario_empleado'] : '' ?>"></label>
                     <span id="salarioError" class="error-message"></span>
@@ -70,10 +120,10 @@ require '../php/conexion.php';
             </div>
         <?php
         } else {
-            $query = "SELECT empleado.id_empleado, empleado.username_empleado, empleado.salario_empleado, empleado.DNI_empleado, persona.*, tipoEmpleado.* FROM empleado INNER JOIN persona ON empleado.id_empleado=persona.id_persona INNER JOIN tipoEmpleado ON empleado.tipoEmpleado_empleado=tipoEmpleado.id_tipoEmpleado ORDER BY empleado.username_empleado ASC";
+            $query = "SELECT empleado.id_empleado, empleado.username_empleado, empleado.salario_empleado, empleado.DNI_empleado, persona.*, tipoEmpleado.* FROM empleado INNER JOIN persona ON empleado.persona_empleado=persona.id_persona INNER JOIN tipoEmpleado ON empleado.tipoEmpleado_empleado=tipoEmpleado.id_tipoEmpleado WHERE username_empleado NOT LIKE :usuarioActual ORDER BY empleado.username_empleado ASC";
 
             $stmt = $pdo->prepare($query);
-
+            $stmt->bindParam(':usuarioActual', $_SESSION['user_id']);
             $stmt->execute();
 
             $resultadoQuery = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -120,7 +170,5 @@ require '../php/conexion.php';
         }
         ?>
     </main>
-
-<script src="../js/modal.js"></script>
 </body>
 </html>

@@ -45,6 +45,5 @@ $info_user = recuperarInfoUsuario($pdo, $_SESSION['user_id']);
         
     </main>
 
-<script src="../js/modal.js"></script>
 </body>
 </html>

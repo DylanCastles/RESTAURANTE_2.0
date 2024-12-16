@@ -25,7 +25,7 @@ $fechaHoraActual->modify('+ 1 hour');
 $fechaHoraActual = $fechaHoraActual->format('Y-m-d H:i:s');
 
 // Construcción dinámica de condiciones y ordenación
-$conditions = "WHERE o.fechaFinal_ocupacion > '$fechaHoraActual'";
+$conditions = "WHERE o.fechaFinal_ocupacion < '$fechaHoraActual'";
 $order_by = "";
 $params = [];
 
